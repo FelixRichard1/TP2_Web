@@ -1,0 +1,21 @@
+{% extends 'base.jinja' %}
+
+{% block titre %} <h1 class="mb-4">Animaux récents</h1> {% endblock %}
+
+{% block content %} 
+    <div class="d-flex flex-wrap gap-3"> 
+        {% for animal in animaux_recents %}
+            <div class="card bg-dark" style="flex: 1 1 350px;">
+                <div class="card-header">
+                    <a id="details" class="float-end" href="/details?id={{animal.id}}"><img src="../static/images/details.png" alt="Détails" /></a>
+                    <h5 class="mr-3">{{animal.nom}}</h5>
+                    <p class="text-muted small m-0">{{animal.espece_nom}}</p>
+                </div>
+                <div class="card-body">
+                    <img class="card-img-top img-fluid" src="../static/images/{{animal.image}}"
+                        alt="Image de {{animal.nom}}">
+                </div>
+            </div> 
+        {% endfor %} 
+    </div> 
+{% endblock %}

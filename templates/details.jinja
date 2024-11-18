@@ -1,0 +1,25 @@
+{% extends 'base.jinja' %}
+
+{% block titre %} <h1 class="mb-4">Détails de {{animal.nom}}</h1> {% endblock %}
+
+{% block content %} 
+    <div class="d-flex bg-dark">
+        <div class="card bg-dark" style="flex: 1 1 50%; max-width: 50%;">
+            <div class="card-header">
+                <a id="modifier" class="float-end" href="/modifier?id={{animal.id}}">
+                    <img src="../static/images/edit.png"alt="Modifier"/>
+                </a>
+                <h3>{{animal.nom}}</h3>
+                <p class="text-muted">{{animal.date_de_naissance}}</p>
+                <p class="small m-0">{{animal.espece}}</p>
+            </div>
+            <div class="card-body">
+                <p class="card-text mx-2 {% if animal.description %} ">{{animal.description}} {% else %} text-muted">
+                    Description manquante {% endif %}</p>
+            </div>
+        </div>
+        <div class="d-flex align-items-top justify-content-center">
+            <img class="img-fluid mb-auto p-3" src="../static/images/{{animal.image}}" alt="Image de {{animal.nom}}">
+        </div>
+    </div> 
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'base.jinja' %} 
+
+{% block titre %} <h1 class="mb-4">Modification de {{animal.nom}}</h1> {% endblock %}
+
+{% block content %}
+    <form action="/sauvegarder?id={{animal.id}}" method="POST">
+        <input type="hidden" name="animal_id" value="{{animal.id}}">
+        <div class="d-flex bg-dark">
+            <div class="card bg-dark" style="flex: 1 1 50%; max-width: 50%;">
+                <div class="card-body">
+                    <label for="nom">Nom: </label>
+                    <input type="text" id="nom" name="nom" value="{{animal.nom}}" class="form-control">
+                    <p class="text-danger small mb-3">{% if errors.nom %}{{ errors.nom }}{% endif %}</p>
+
+                    <label for="date_de_naissance">Date de naissance: </label>
+                    <input type="date" id="date_de_naissance" name="date_de_naissance" value="{{animal.date_de_naissance}}" class="form-control mb-3" required>
+
+                    <label for="espece">Espèce: </label>
+                    <select id="espece" name="espece" selected="{{animal.espece_nom}}" class="form-control mb-3" required>
+                        {% for espece in espece %}
+                            <option value="{{espece.id}}" {% if espece.id==animal.espece_id %}selected{% endif %}> {{espece.nom}} </option>
+                        {% endfor %}
+                    </select>
+
+                    <label for="description">Description: </label>
+                    <textarea id="description" name="description" class="form-control">{{animal.description}}</textarea>
+                    <p class="text-danger small mb-3">{% if errors.description %}{{ errors.description }}{% endif %}</p>
+                </div>
+                <div class="card-footer d-flex justify-content-between">
+                    <button type="reset" class="btn btn-secondary">Réinitialiser</button>
+                    <button type="submit" class="btn btn-primary">Sauvegarder</button>
+                </div>
+            </div>
+            <div class="d-flex align-items-top justify-content-center">
+                <img class="img-fluid mb-auto p-3" src="../static/images/{{animal.image}}" alt="Image de {{animal.nom}}">
+            </div>
+        </div>
+    </form> 
+{% endblock %}

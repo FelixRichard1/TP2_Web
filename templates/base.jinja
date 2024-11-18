@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8" />
+    <title>{% if titre %} {{titre}} | {% endif %} TP1</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="../static/favicon.ico" />
+    <link rel="stylesheet" href="../static/css/styles.css" />
+</head>
+
+<body style="min-height: 100vh;">
+    <header class="header">
+        <nav class="navbar navbar-dark bg-dark d-flex">
+            <a class="navbar-brand d-flex align-items-center me-5" href="/">
+                <img class="me-3" src="../static/images/logo.png"/>
+                <h3>Travail Pratique 1</h3>
+            </a>
+            <ul class="navbar-nav d-flex flex-row flex-grow-1">
+                {% for page in routes %}
+                    <li class="nav-item me-4">
+                        <a class="nav-link {% if route_active == page.route %}active{% endif %}" href="{{page.route}}">
+                            {{page.nom}}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </nav>
+    </header>
+    <main>
+        {% block titre %} {% endblock %}
+        <div id="content">
+            {% block content %} {% endblock %}
+        </div>
+    </main>
+    <footer>
+        <p class="text-white">&copy; 2024 Félix Richard. Tous droits réservés</p>
+    </footer>
+</body>
+
+</html>
