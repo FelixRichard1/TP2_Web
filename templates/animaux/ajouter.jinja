@@ -3,22 +3,29 @@
 {% block titre %} <h1 class="mb-4">Ajouter un animal</h1> {% endblock %} 
 
 {% block content %} 
-<form action="/ajouter" method="POST">
+<form action="/animaux/ajouter" method="POST">
     <div class="d-flex bg-dark">
-        <div class="card bg-dark" style="flex: 1 1 50%; max-width: 50%;">
+        <div class="card bg-dark" style="flex: 1 1 350px; max-width: 50%;">
             <div class="card-body">
                 <label for="nom">Nom: </label>
                 <input type="text" id="nom" name="nom" class="form-control" value="{{ nom }}">
                 <p class="text-danger small mb-3">{% if errors.nom %}{{ errors.nom }}{% endif %}</p>
+
                 <label for="date_de_naissance">Date de naissance: </label>
                 <input type="date" id="date_de_naissance" name="date_de_naissance" class="form-control mb-3"
                     value="{{ date_de_naissance }}">
+
                 <label for="espece">Espèce: </label>
                 <select id="espece" name="espece" class="form-control mb-3"> {% for espece in espece %} <option
                         value="{{espece.id}}">{{ espece.nom }}</option> {% endfor %} </select>
+
                 <label for="description">Description: </label>
                 <textarea id="description" name="description" class="form-control">{{ description }}</textarea>
                 <p class="text-danger small mb-3">{% if errors.description %}{{ errors.description }}{% endif %}</p>
+
+                <label for="image">Image: </label>
+                <input type="file" id="image" name="image" accept="image/*" class="form-control mb-3">
+                <p class="text-danger small mb-3">{% if errors.image %}{{ errors.image }}{% endif %}</p>
             </div>
             <div class="card-footer d-flex justify-content-between">
                 <button type="reset" class="btn btn-secondary">Réinitialiser</button>
@@ -30,4 +37,5 @@
         </div>
     </div>
 </form>
+
 {% endblock %}

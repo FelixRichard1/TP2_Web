@@ -1,0 +1,79 @@
+{% extends "base.jinja" %} 
+{% block content %} 
+    {% if creation %} 
+        <h1 class="mb-4">Créer un compte</h1>
+        <form class="formsAuthentification mb-3" method="post" action="/comptes/creer" novalidate>
+            <div class="form-group mb-3">
+                <label for="courriel">Courriel :</label>
+                <input name="courriel" id="courriel" type="email" value="{{ courriel }}" class="form-control"> 
+                {% if errors.courrielHtml %}
+                    <span class="error">{{ errors.courrielHtml }}</span><br>
+                {% endif %} 
+                {% if errors.courrielInvalide %}
+                    <span class="error">{{ errors.courrielInvalide }}</span><br>
+                {% endif %} 
+                {% if errors.courrielExistant %}
+                    <span class="error">{{ errors.courrielExistant }}</span><br>
+                {% endif %}
+            </div>
+            <div class="form-group mb-3">
+                <label for="mdp"> Mot de passe : </label>
+                <input name="mdp" id="mdp" type="password" class="form-control"> 
+                {% if errors.mdp1Html %}
+                    <span class="error">{{ errors.mdp1Html }}</span><br>
+                {% endif %} 
+                {% if errors.mdpVide %}
+                    <span class="error">{{ errors.mdpVide }}</span><br>
+                {% endif %} 
+                {% if errors.mdp1Length %}
+                    <span class="error">{{ errors.mdp1Length }}</span><br>
+                {% endif %}
+            </div>
+            <div class="form-group mb-5">
+                <label for="mdp2"> Confirmer votre mot de passe :</label>
+                <input name="mdp2" id="mdp2" type="password" class="form-control"> 
+                {% if errors.mdpDiff %}
+                    <span class="error">{{ errors.mdpDiff }}</span><br>
+                {% endif %} 
+                {% if errors.mdp1Html %}
+                    <span class="error">{{ errors.mdp1Html }}</span><br>
+                {% endif %}
+            </div>
+            <input class="btn btn-primary" type="submit" value="Créer le compte">
+        </form>
+        <div class="col-3 align-content-center">
+            <span class="text-muted">Déjà un compte? </span>
+            <a href="/comptes/authentification">Se connecter</a>
+        </div> 
+    {% else %} 
+        <h1 class="mb-4">Se connecter</h1>
+        <form class="formsAuthentification mb-3" method="post" action="/comptes/authentification" novalidate>
+            <div class="form-group mb-3">
+                <label for="courriel">Courriel :</label>
+                <input name="courriel" id="courriel" type="email" value="{{ courriel }}" class="form-control"> 
+                {% if errors.courrielHtml %}
+                    <span class="error">{{ errors.courrielHtml }}</span><br>
+                {% endif %} 
+                {% if errors.courrielInvalide %}
+                    <span class="error">{{ errors.courrielInvalide }}</span><br>
+                {% endif %} 
+                {% if errors.courrielExistant %}
+                    <span class="error">{{ errors.courrielExistant }}</span><br>
+                {% endif %}
+            </div>
+            <div class="form-group mb-5">
+                <label for="mdp">Mot de passe :</label>
+                <input name="mdp" id="mdp" type="password" class="form-control"> 
+                {% if errors.mdpVide %}
+                    <span class="error">{{ errors.mdpVide }}</span><br>
+                {% endif %}
+                {% if errors.mdp1Html %}
+                    <span class="error">{{ errors.mdp1Html }}</span><br>
+                {% endif %}
+            </div>
+            <input class="btn btn-primary" type="submit" value="Se connecter">
+        </form>
+        <span class="text-muted">Pas de compte? </span>
+        <a href="/comptes/creer">Créer un compte</a> 
+    {% endif %} 
+{% endblock %}

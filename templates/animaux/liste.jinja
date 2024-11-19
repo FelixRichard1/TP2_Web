@@ -1,0 +1,34 @@
+{% extends 'base.jinja' %}
+
+{% block titre %} <h1 class="mb-4">Tous les animaux</h1> {% endblock %} 
+
+{% block content %}
+    <form method="GET" action="/animaux/liste" class="mb-4">
+        <div class="input-group">
+            <input type="text" name="search" class="form-control" placeholder="Rechercher un animal par nom ou description..." value="{{ request.args.get('search', '') }}">
+            <button type="submit" class="btn btn-primary">Rechercher</button>
+        </div>
+    </form>
+    <div class="d-flex flex-wrap gap-3"> 
+        {% for animal in animaux %} 
+            <div class="card bg-dark"
+                style="flex: 1 1 350px;">
+                <div class="card-header">
+                    <a id="details" class="float-end" href="/animaux/details?id={{animal.id}}"><img src="../static/images/details.png"
+                            alt="Détails" /></a>
+                    <h5 class="mr-3">{{animal.nom}}</h5>
+                    <p class="text-muted small m-0">{{animal.espece_nom}}</p>
+                </div>
+                <div class="card-body">
+                    <img class="card-img-top img-fluid" src="../static/images/{{animal.image}}" alt="Image de {{animal.nom}}">
+                </div>
+                {% if session %} 
+                    <form action="/animaux/adopter" method="POST">
+                        <input type="hidden" name="id" value="{{animal.id}}">
+                        <button class="btn btn-primary m-3 mt-0">Adopter</button>
+                    </form>
+                {% endif %}
+            </div> 
+        {% endfor %} 
+    </div> 
+{% endblock %}

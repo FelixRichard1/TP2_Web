@@ -6,9 +6,15 @@
     <div class="d-flex bg-dark">
         <div class="card bg-dark" style="flex: 1 1 50%; max-width: 50%;">
             <div class="card-header">
-                <a id="modifier" class="float-end" href="/modifier?id={{animal.id}}">
-                    <img src="../static/images/edit.png"alt="Modifier"/>
-                </a>
+                {% if proprietaire %}
+                    <a id="modifier" class="float-end" href="/animaux/modifier?id={{animal.id}}">
+                        <img src="../static/images/modifier.png"alt="Modifier"/>
+                    </a>
+                {% else %}
+                    <a id="nonModifiable" class="float-end">
+                        <img src="../static/images/nonModifiable.png" alt="Non-modifiable" draggable="false"/>
+                    </a>
+                {% endif %}
                 <h3>{{animal.nom}}</h3>
                 <p class="text-muted">{{animal.date_de_naissance}}</p>
                 <p class="small m-0">{{animal.espece}}</p>
@@ -21,5 +27,5 @@
         <div class="d-flex align-items-top justify-content-center">
             <img class="img-fluid mb-auto p-3" src="../static/images/{{animal.image}}" alt="Image de {{animal.nom}}">
         </div>
-    </div> 
+    </div>
 {% endblock %}

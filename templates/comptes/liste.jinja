@@ -1,6 +1,6 @@
 {% extends 'base.jinja' %}
 
-{% block titre %} <h1 class="mb-4">Tous les animaux</h1> {% endblock %} 
+{% block titre %} <h1 class="mb-4">Tous les comptes</h1> {% endblock %} 
 
 {% block content %} 
     <div class="d-flex flex-wrap gap-3"> 
@@ -8,8 +8,9 @@
             <div class="card bg-dark"
                 style="flex: 1 1 350px;">
                 <div class="card-header">
-                    <a id="details" class="float-end" href="/details?id={{animal.id}}"><img src="../static/images/details.png"
-                            alt="Détails" /></a>
+                    <a id="details" class="float-end" href="/comptes/details?id={{animal.id}}">
+                        <img src="../static/images/details.png" alt="Détails"/>
+                    </a>
                     <h5 class="mr-3">{{animal.nom}}</h5>
                     <p class="text-muted small m-0">{{animal.espece_nom}}</p>
                 </div>
